@@ -2,13 +2,12 @@ from django.db import migrations
 from django.contrib.auth.hashers import make_password
 
 def create_superuser(apps, schema_editor):
-    User = apps.get_model('app', 'User')
-    if not User.objects.filter(email='superuser@beautyparlour.com').exists():
+    User = apps.get_model('auth', 'User')
+    if not User.objects.filter(username='superuser').exists():
         User.objects.create(
-            name='Super Admin',
+            username='superuser',
             email='superuser@beautyparlour.com',
             password=make_password('superadmin123'),
-            role='admin',
             is_staff=True,
             is_superuser=True
         )
